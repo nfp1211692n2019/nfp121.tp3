@@ -19,27 +19,40 @@ public class Pile2 implements PileI {
      *            la taille de la pile, la taille doit etre > 0
      */
     public Pile2(int taille) {
-        // prevoir le cas <=0
-        // a completer
+        if(taille<= 0){
+            taille = CAPACITE_PAR_DEFAUT;
+        }
+        else{
+            this.zone = new Object[taille];
+            this.ptr = 0;
+        }
     }
 
     // constructeur fourni
     public Pile2() {
-        this(0);
+        this(CAPACITE_PAR_DEFAUT);
     }
 
     public void empiler(Object o) throws PilePleineException {
-        // a completer
-    }
+        if( estPleine() ){
+            throw new PilePleineException();
+        }else{
+            this.zone[this.ptr] = obj;
+            this.ptr++;
+        }    }
 
     public Object depiler() throws PileVideException {
-        // a completer
-        return null;
+        if( estVide() ) {
+            throw new PileVideException();
+        }else{
+            this.ptr--;
+            return zone[ptr];
+        }
     }
 
     public Object sommet() throws PileVideException {
-        // a completer
-        return null;
+        if(estVide() ) throw new PileVideException();
+        else return zone[ptr-1];
     }
 
     /**
@@ -48,8 +61,8 @@ public class Pile2 implements PileI {
      * @return vrai si la pile est vide, faux autrement
      */
     public boolean estVide() {
-        // a completer
-        return false;
+        return taille() == 0 ;
+
     }
 
     /**
@@ -58,8 +71,8 @@ public class Pile2 implements PileI {
      * @return vrai si la pile est pleine, faux autrement
      */
     public boolean estPleine() {
-        // a completer
-        return false;
+        return taille() == capacite();
+
     }
 
     /**
@@ -69,9 +82,13 @@ public class Pile2 implements PileI {
      * @return une representation en String d'une pile
      */
     public String toString() {
-        String s = "[";
-        // a completer
-        return s + "]";
+        StringBuffer stringB = new StringBuffer("[");
+        for (int index = ptr - 1; index >= 0;index--) {
+            stringB.append(zone[index].toString());
+            if ( index > 0 ) stringB.append(", ");
+        }
+            stringB.append("]");
+            return stringB.toString();
     }
 
     public boolean equals(Object o) {
@@ -90,8 +107,8 @@ public class Pile2 implements PileI {
      * @return le nombre d'element
      */
     public int taille() {
-        // a completer
-        return 0;
+        return ptr;
+
     }
 
     /**
@@ -100,8 +117,8 @@ public class Pile2 implements PileI {
      * @return le nombre d'element
      */
     public int capacite() {
-        // a completer
-        return 0;
+        return zone.length;
+
     }
 
 } // Pile2.java

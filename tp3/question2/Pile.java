@@ -1,5 +1,6 @@
 package question2;
 
+
 import question1.PilePleineException;
 import question1.PileVideException;
 
@@ -113,10 +114,10 @@ public class Pile implements PileI {
         StringBuffer stringB = new StringBuffer("[");
         for (int index = ptr - 1; index >= 0;index--) {
             stringB.append(zone[index].toString());
-            if ( index > 0 ) stringB.append("- ");
+            if ( index > 0 ) stringB.append(", ");
         }
             stringB.append("]");
             return stringB.toString();
-        }   
+    }   
     
 }

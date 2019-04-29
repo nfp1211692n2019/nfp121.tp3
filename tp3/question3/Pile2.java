@@ -9,21 +9,38 @@ public class Pile2<T> implements PileI<T>{
     /** par délégation : utilisation de la class Stack */
     private Stack<T> stk;
     /** la capacité de la pile */
-    private int capacité;
+    private int capacité = CAPACITE_PAR_DEFAUT;
 
     /** Création d'une pile.
      * @param taille la "taille maximale" de la pile, doit être > 0
      */
     public Pile2(int taille){
-        // à compléter
+        if (taille > 0) this.stk =new Stack<T>();    
     }
 
     public Pile2(){
-        // à compléter
+        this(CAPACITE_PAR_DEFAUT);
     }
 
+    public int capacite() {
+        return capacite;
+    };
+
+    public int taille() {
+        return stk.size();
+    };
+
+    public boolean estPleine() {
+        return taille == capacite;
+    }
     public void empiler(T o) throws PilePleineException{
-        // à compléter
+        if(!estPleine()){
+            stk.push(o);
+            taille++;
+        }
+        else {
+            throw new PilePleineException();
+        }
     }
 
     public T depiler() throws PileVideException{
